@@ -22,7 +22,8 @@ class AuthController extends Controller
     */
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
-
+    protected $redirectPath = '/admin';
+    protected $redirectAfterLogout = '/auth/login';
     /**
      * Create a new authentication controller instance.
      *
@@ -45,7 +46,21 @@ class AuthController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
-        ]);
+        ],[
+            'name.required'=>'用户名必填',
+            'name.max'=>'用户名过长,最大32位',
+            'name.unique'=>'此用户名已存在',
+
+            'email.required'=>'邮箱必填',
+            'email.email'=>'邮箱格式错误',
+            'email.max'=>'email最长255位',
+            'email.unique'=>'此邮箱已注册',
+
+            'password.required'=>'密码必填',
+            'password.confirmed'=>'两次输入密码不同',
+            'password.min'=>'密码最小6位',
+        ]
+);
     }
 
     /**

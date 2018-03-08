@@ -39,6 +39,8 @@ class RouteServiceProvider extends ServiceProvider
     {
         $router->group(['namespace' => $this->namespace], function ($router) {
             require app_path('Http/routes.php');
+             //重新注册一个路由文件,专门写后台路由
+            
         });
     }
 }
